@@ -1,10 +1,11 @@
 from django.http.response import HttpResponse, JsonResponse
 from django.views.decorators.http import require_GET, require_POST
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from webpush import send_user_notification
 import json
+from django.conf import settings
 
 
 @require_GET
@@ -33,4 +34,10 @@ def send_push(request):
         return JsonResponse(status=500, data={"message": "An error occurred"})
 
 
+@require_GET
+def home(request):
+    webpush_settings = getattr(settings, 'WEBPUSG_SETTINGS', {})
+    vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
+    user = request.user
+    return render(request, 'home,html', {user : user, 'vapid_key':vapid_key})
 
