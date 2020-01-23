@@ -36,8 +36,8 @@ def send_push(request):
 
 @require_GET
 def home(request):
-    webpush_settings = getattr(settings, 'WEBPUSG_SETTINGS', {})
+    webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
     vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
     user = request.user
-    return render(request, 'home,html', {user : user, 'vapid_key':vapid_key})
+    return render(request, 'home.html', {user: user, 'vapid_key':vapid_key})
 
