@@ -1,4 +1,4 @@
-const register = async () => {
+const registerSw = async () => {
     if ('serviceWorker' in navigator) {
         const reg = await navigator.serviceWorker.register('sw.js');
         initialiseState(reg)
@@ -90,3 +90,4 @@ const handleResponse = (res) => {
 };
 
 registerSw();
+

@@ -26,7 +26,7 @@ SECRET_KEY = 'mk^6sd+(@+$btzm$&a3&r%^cz(0py_$ym5_+l^&eg0_&b4mmm6'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1', 'e6c70154.ngrok.io',
+    '127.0.0.1', '5576be00.ngrok.io'
 ]
 
 
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'pushnotify.urls'
 
@@ -128,6 +129,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,"static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
 ]

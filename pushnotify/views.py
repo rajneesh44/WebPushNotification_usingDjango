@@ -8,9 +8,18 @@ import json
 from django.conf import settings
 
 
+# @require_GET
+# def home(request):
+#     return HttpResponse('<H1>Home Page</H1>')
+
+
 @require_GET
 def home(request):
-    return HttpResponse('<H1>Home Page</H1>')
+    webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
+    vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
+    print(type(vapid_key))
+    user = request.user
+    return render(request, 'home.html', {user: user, 'vapid_key':vapid_key})
 
 
 @require_POST
@@ -33,11 +42,4 @@ def send_push(request):
     except TypeError:
         return JsonResponse(status=500, data={"message": "An error occurred"})
 
-
-@require_GET
-def home(request):
-    webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
-    vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
-    user = request.user
-    return render(request, 'home.html', {user: user, 'vapid_key':vapid_key})
 
